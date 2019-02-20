@@ -9,7 +9,7 @@ public abstract class Shape implements Draw {
     public Shape (int x, int y){
         this.x=x;
         this.y=y;
-        this.cont = 1;
+        this.cont = 5;
     }
 
     public int getCont() {

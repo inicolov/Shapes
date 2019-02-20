@@ -33,6 +33,7 @@ public class Circle extends Shape {
     @Override
     public void draw (Graphics2D g){
         int R = 2*radius;
+        g.setStroke(new BasicStroke(getCont()));
         g.drawOval(getX()-radius, getY()-radius, R, R);
     }
 }
