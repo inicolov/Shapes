@@ -42,6 +42,7 @@ public class Rectangle extends Shape {
 
     @Override
     public void draw (Graphics2D g){
+        g.setStroke(new BasicStroke(getCont()));
         g.drawRect(getX(), getY(), getWitdth(), getHight());
     }
 }

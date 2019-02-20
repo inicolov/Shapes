@@ -4,10 +4,20 @@ public abstract class Shape implements Draw {
 
     private int x;
     private int y;
+    private int cont;
 
     public Shape (int x, int y){
         this.x=x;
         this.y=y;
+        this.cont = 1;
+    }
+
+    public int getCont() {
+        return cont;
+    }
+
+    public void setCont(int cont) {
+        this.cont = cont;
     }
 
     public int getX() {
