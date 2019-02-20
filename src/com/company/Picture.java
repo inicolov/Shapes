@@ -1,5 +1,6 @@
 package com.company;
 
+import javax.swing.event.EventListenerList;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +8,26 @@ import java.util.List;
 public class Picture  {
 
     private List<Shape> shapes;
+    private EventListenerList listeners = new EventListenerList();
+
+    public void addPictureListener(PicEventListener listener){
+            listeners.add(PicEventListener.class, listener);
+    }
+
+    public void removePicListener (PicEventListener listener){
+        listeners.remove(PicEventListener.class, listener);
+    }
+
+    private void fireShapeAdded (PicEvent e){
+        Object[] l = (Object[])listeners.getListenerList();
+        for (int i = 0; i <l.length ; i+=2) {
+            if (l[i]==PicEventListener.class){
+                ((PicEventListener)l[i+1]).shapeAdded(e);
+            }
+        }
+    }
+
+
 
     public Picture (Shape... shapes){
         this.shapes = new ArrayList<>();
@@ -37,5 +58,8 @@ public class Picture  {
 
     public void add(Shape shape) {
         shapes.add(shape);
+        PicEvent e= new PicEvent(this);
+        e.setShape(shape);
+        fireShapeAdded(e);
     }
 }
