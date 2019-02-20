@@ -9,6 +9,19 @@ public class PicWindow extends JFrame {
 
     public PicWindow(String title, Picture p){
         super(title);
+
+        p.addPictureListener(new PicEventListener() {
+            @Override
+            public void shapeAdded(PicEvent e) {
+                PicWindow.this.invalidate();
+                PicWindow.this.repaint();
+            }
+
+            @Override
+            public void shapeRemoved(PicEvent e) {
+
+            }
+        });
         Dimension d = new Dimension(200, 200);
         setMinimumSize(d);
         setPreferredSize(d);
@@ -24,11 +37,20 @@ public class PicWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 p.add(new Circle(50, 50, 50));
-                invalidate();
-                repaint();
+                //invalidate();
+                //repaint();
             }
         });
         getContentPane().add(pnlButtons, BorderLayout.EAST);
+
+        JButton btnAddRectangle = new JButton("Add Rectangle");
+        pnlButtons.add(btnAddRectangle);
+        btnAddRectangle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                p.add(new Rectangle(20,15,20,15));
+            }
+        });
     }
 
     public PicWindow (){
